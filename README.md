@@ -1,5 +1,7 @@
 # Cron Trigger
 
+![mock up](cron-trigger.png)
+
 This is a micromaterial to practice both reading and writing cron expressions
 
 We _miiiiiight_ at some point also expand to use AWS style syntax (with the zany "?" stuff everywhere), but the simple MVP is just regular ole crons.

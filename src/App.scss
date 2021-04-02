@@ -22,6 +22,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #FF007D;
+
+  .cronItem {
+    color: white;
+  }
 }
 
 .App-header {
@@ -41,11 +45,6 @@
   }
 }
 
-.nextCron {
-  margin-top: 1em;
-  padding: 0.25em;
-  border-radius: 0.75em;
-}
 
 .cronPhrase {
   margin: 2em;
@@ -58,6 +57,13 @@
       justify-content: space-between;
       border-radius: 0.25em;
   }
+
+  .nextCron {
+    margin-top: 1em;
+    padding: 0.25em;
+    border-radius: 0.75em;
+    font-size: 2em;
+  }
 }
 
 @media only screen and (max-width: 599px) {
@@ -66,6 +72,13 @@
       margin: auto;
       justify-content: space-between;
       border-radius: 0.25em;
+  }
+
+  .nextCron {
+    margin-top: 1em;
+    padding: 0.25em;
+    border-radius: 0.75em;
+    font-size: 1.5em;
   }
 }
 
@@ -77,12 +90,9 @@
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.congrats {
+  margin-top: .75em;
+  &.inactive {
+    visibility: hidden;
   }
 }
-

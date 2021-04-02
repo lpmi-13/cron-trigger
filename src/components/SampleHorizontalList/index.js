@@ -39,10 +39,6 @@ const SampleHorizontalList = ({ cronDigits, handleReorder }) => {
     setDigits(cronDigits)
   }, [cronDigits])
 
-  useEffect(() => {
-    handleReorder(digits)
-  }, [digits])
-
   const onDragEnd = (result) => {
     // dropped outside the list
     if (!result.destination) {
@@ -56,6 +52,7 @@ const SampleHorizontalList = ({ cronDigits, handleReorder }) => {
     );
 
     setDigits(items);
+    handleReorder(items)
   }
 
   return (

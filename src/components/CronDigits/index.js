@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
 import { cronStringArray, generateCronPhrase } from '../../util';
@@ -43,8 +43,6 @@ const mixUpDigits = (cronArray) => {
   return shuffled;
 }
 
-// const PAUSE_LENGTH = 1000;
-
 const CronDigits = () => {
 
   const [cronIndex, setCronIndex] = useState(0);
@@ -59,11 +57,11 @@ const CronDigits = () => {
     setCorrectAnswer(false);
   }
 
-  const handleReorderDigits = (sequence) => {
+  const handleReorderDigits = useCallback((sequence) =>  {
     const reconstructed = sequence.map(t => t.item).join(' ')
     const originalCron = cronStringArray[cronIndex];
     setCorrectAnswer(reconstructed === originalCron)
-  }
+  }, [cronIndex])
 
   useEffect(() => {
     setCronPhrase(generateCronPhrase(cronStringArray[cronIndex]))
@@ -86,7 +84,7 @@ const CronDigits = () => {
             >
             next cron
           </motion.button>
-          {correctAnswer && <CorrectMessage />}
+          <CorrectMessage active={correctAnswer}/>
         </div>
     )
 }

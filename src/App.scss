@@ -31,6 +31,46 @@
   padding: 1em 0;
   text-transform: uppercase;
   font-size: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  .modeButton {
+    padding: 0.25em;
+    border-radius: 0.75em;
+  }
+}
+
+.nextCron {
+  margin-top: 1em;
+  padding: 0.25em;
+  border-radius: 0.75em;
+}
+
+.cronPhrase {
+  margin: 2em;
+}
+
+@media only screen and (min-width: 600px) {
+  .cronSelection {
+      width: 22em;
+      margin: auto;
+      justify-content: space-between;
+      border-radius: 0.25em;
+  }
+}
+
+@media only screen and (max-width: 599px) {
+  .cronSelection {
+      width: 15em;
+      margin: auto;
+      justify-content: space-between;
+      border-radius: 0.25em;
+  }
+}
+
+.cronItem {
+  width: 1em;
 }
 
 .App-link {
@@ -45,3 +85,4 @@
     transform: rotate(360deg);
   }
 }
+

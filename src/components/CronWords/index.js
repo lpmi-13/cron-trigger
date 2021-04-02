@@ -1,10 +1,8 @@
-import React from 'react';
-
 const CronWords = () => {
     return (
         <div>
             <p>
-                every Wednesday at 3PM
+                UNDER CONSTRUCTION
             </p>
         </div>
     )

@@ -43,7 +43,7 @@ const mixUpDigits = (cronArray) => {
   return shuffled;
 }
 
-const PAUSE_LENGTH = 1000;
+// const PAUSE_LENGTH = 1000;
 
 const CronDigits = () => {
 
@@ -69,14 +69,6 @@ const CronDigits = () => {
     setCronPhrase(generateCronPhrase(cronStringArray[cronIndex]))
     setMixedUpCron(mixUpDigits(cronStringArray[cronIndex]))
   }, [cronIndex]);
-
-//   useEffect(() => {
-//     console.log('correctAnswer changed')
-//    setTimeout(() => {
-//      handleClickNext()
-//      setCorrectAnswer(false)
-//    }, PAUSE_LENGTH) 
-//   }, [correctAnswer])
 
     return (
         <div>

@@ -3,6 +3,17 @@
 const transformNumberToHours = (number) => number > 12 ? number - 12 : number;
 const amOrPm = (number) => number >= 12 ? 'PM' : 'AM';
 
+const getMinutes = (minutes) => minutes === '*' ? 'every minute after' : `at ${minutes} minutes after`;
+
+const getHours = (hours) => {
+  if (hours === 0) {
+    return '12AM';
+  } else {
+    const suffix = hours === '*' ? '' : amOrPm(hours);
+    return hours === '*' ? 'every hour' : `${transformNumberToHours(hours)}${suffix}`;
+  }
+}
+
 const monthNameMap = {
   '1': 'January',
   '2': 'February',
@@ -30,28 +41,23 @@ const dayNameMap = {
 };
 
 const dayOfMonthSuffix = (day) => {
-  switch(day.slice(-1)){
+  switch(day){
     case '':
       return '';
     case '1':
+    case '21':
+    case '31':
       return 'st';
     case '2':
+    case '22':
       return 'nd';
     case '3':
+    case '23':
       return 'rd';
     default:
       return 'th';
   }
 }
-
-const getMinutes = (minutes) => minutes === '*' ? 'every minute after' : `at ${minutes} minutes after`;
-
-const getHours = (hours) => {
-  const suffix = hours === '*' ? '' : amOrPm(hours);
-  return hours === '*' ? 'every hour' : `${transformNumberToHours(hours)}${suffix}`;
-}
-
-
 
 // this is a terrible name, and I feel terrible for creating it
 const getDayOfMonthAndMonthAndDayOfWeek = (dayOfMonth, month, dayOfWeek) => {
@@ -121,33 +127,40 @@ export const generateCronPhrase = phraseWithDigits => {
 }
 
 
-// we need to generate stuff like
-// At 8AM every day ( 0 8 * * *)
-// At minute 45 every Tuesday ( 45 * * * 2)
-// At 7:30AM on Sunday (30 7 * * 0)
-// At 2PM and 6PM every Wednesday ( 0 14,18 * * 3)
-// Every 15 minutes ( 0,15,30,45 * * * *)
-// At 4:05AM every day ( 5 4 * * *)
-// At 11PM every day in August (0 23 * 8 *)
-// at 8PM every day on days 12-20 of the month ( 0 20 12-20 * *)
-// At 3:23PM on the first day of every month ( 23 3 1 * *)
-// at 2AM and 5PM on Monday in July ( 0 2,17 * 8 1)
+const numberRange = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
-export const cronStringArray = [
-  '10 * * * *',
-  '* 3 * * *',
-  '* * * 2 *',
-  '* * * * 1',
-  '30 4 * * *',
-  '25 15 * * *',
-  '45 20 * 10 *',
-  '20 1 * * 5',
-  '18 5 * 4 3',
-  '22 20 3 2 *',
-  '* * 5 2 5',
-  '10 12 5 * 5',
-  '30 6 10 * *',
-  '55 10 15 4 1',
-  '25 * 1 3 3',
-  '12 12 2 * *',
-]
+export const generateCronString = () => {
+  // this can be a zero
+  const minute = () => Math.random() < 0.5 ? '*' : numberRange(0, 59);
+  // this can be zero
+  const hour = () => Math.random() < 0.5 ? '*' : numberRange(0, 23);
+  // this has to start with 1
+  const month = () =>  Math.random() < 0.5 ? '*' : numberRange(1, 12);
+  const dayOfMonth = () => {
+    let generatedDay;
+    if (month === 2) {
+      generatedDay = numberRange(1, 28);
+    } else if (month === 4 || month === 6 || month === 9 || month === 11) {
+      generatedDay = numberRange(1,30);
+    } else {
+      generatedDay = numberRange(1,31);
+    }
+    return Math.random() < 0.5 ? '*' : generatedDay;
+  }
+  // this can be 0, since 7 == Sunday is non-standard
+  const dayOfWeek = () => Math.random() < 0.5 ? '*' : numberRange(0,6);
+
+  const genMinute = minute()
+  const genHour = hour();
+  const genMonth = month()
+  const genDayOfMonth = dayOfMonth()
+  const genDayOfWeek = dayOfWeek();
+
+  const fullString = `${genMinute} ${genHour} ${genDayOfMonth} ${genMonth} ${genDayOfWeek}`;
+  // since the correctness check happens after you move something, it doesn't know that this is
+  // already correct, and there's not really much sense practicing it anyway
+  if (fullString === '* * * * *') {
+      return generateCronString()
+  }
+  return fullString;
+}

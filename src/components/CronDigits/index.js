@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-import { cronStringArray, generateCronPhrase } from '../../util';
+import { generateCronPhrase, generateCronString } from '../../util';
 
 import SampleHorizontalList from '../SampleHorizontalList';
 import CorrectMessage from '../CorrectMessage';
@@ -45,31 +45,30 @@ const mixUpDigits = (cronArray) => {
 
 const CronDigits = () => {
 
-  const [cronIndex, setCronIndex] = useState(0);
-  const [cronPhrase, setCronPhrase] = useState(generateCronPhrase(cronStringArray[cronIndex]))
-  const [mixedUpCron, setMixedUpCron] = useState(mixUpDigits(cronStringArray[cronIndex]))
+  const newCron = generateCronString();
+
+  const [cronString, setCronString] = useState(newCron)
+  const [cronPhrase, setCronPhrase] = useState(generateCronPhrase(cronString))
+  const [mixedUpCron, setMixedUpCron] = useState(mixUpDigits(cronString))
   const [correctAnswer, setCorrectAnswer] = useState(false);
 
-  const totalCrons = cronStringArray.length
-
   const handleClickNext = () => {
-    cronIndex >= totalCrons - 1 ? setCronIndex(0) : setCronIndex(cronIndex + 1);
+    setCronString(generateCronString())
     setCorrectAnswer(false);
   }
 
-  const handleReorderDigits = useCallback((sequence) =>  {
+  const handleReorderDigits = (sequence) =>  {
     const reconstructed = sequence.map(t => t.item).join(' ')
-    const originalCron = cronStringArray[cronIndex];
-    setCorrectAnswer(reconstructed === originalCron)
-  }, [cronIndex])
+    setCorrectAnswer(reconstructed === cronString)
+  }
 
   useEffect(() => {
-    setCronPhrase(generateCronPhrase(cronStringArray[cronIndex]))
-    setMixedUpCron(mixUpDigits(cronStringArray[cronIndex]))
-  }, [cronIndex]);
+    setCronPhrase(generateCronPhrase(cronString))
+    setMixedUpCron(mixUpDigits(cronString))
+  }, [cronString]);
 
     return (
-        <div>
+        <>
           <SampleHorizontalList cronDigits={mixedUpCron} handleReorder={handleReorderDigits} />
           {/* <pre>{cronStringArray[cronIndex]}</pre> */}
           <div className="cronPhrase">
@@ -85,7 +84,7 @@ const CronDigits = () => {
             next cron
           </motion.button>
           <CorrectMessage active={correctAnswer}/>
-        </div>
+        </>
     )
 }
 

@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 
 import CronDigits from './components/CronDigits';
 import CronWords from './components/CronWords';
-// import SampleHorizontalList from './components/SampleHorizontalList';
 
 const App = () => {
 

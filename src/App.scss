@@ -15,11 +15,11 @@
 
 .App-body {
   background-color: #000;
-  min-height: 100vh;
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   font-size: calc(10px + 2vmin);
   color: #FF007D;
 
@@ -45,21 +45,15 @@
   }
 }
 
-
-.cronPhrase {
-  margin: 2em;
-}
-
 @media only screen and (min-width: 600px) {
   .cronSelection {
       width: 22em;
-      margin: auto;
+      margin: 1em auto;
       justify-content: space-between;
       border-radius: 0.25em;
   }
 
   .nextCron {
-    margin-top: 1em;
     padding: 0.25em;
     border-radius: 0.75em;
     font-size: 2em;
@@ -68,14 +62,18 @@
 
 @media only screen and (max-width: 599px) {
   .cronSelection {
-      width: 15em;
-      margin: auto;
+      width: 90%;
+      margin: 1em auto;
       justify-content: space-between;
       border-radius: 0.25em;
   }
 
+  .cronPhrase {
+    width: 85%;
+    min-height: 5em;
+  }
+
   .nextCron {
-    margin-top: 1em;
     padding: 0.25em;
     border-radius: 0.75em;
     font-size: 1.5em;

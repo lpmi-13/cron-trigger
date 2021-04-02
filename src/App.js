@@ -20,9 +20,9 @@ const App = () => {
             className={`modeButton ${mode ? 'active' : 'inactive'}`}
             disabled={mode}
             onClick={toggleMode}
-            aria-label="read a cron"
+            aria-label="write a cron"
             >
-            Read a Cron
+            Write a Cron
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -30,9 +30,9 @@ const App = () => {
             className={`modeButton ${mode ? 'inactive' : 'active'}`}
             disabled={!mode}
             onClick={toggleMode}
-            aria-label="write a cron"
+            aria-label="read a cron"
             >
-            Write a Cron
+            Read a Cron
           </motion.button>
       </header>
       <main className="App-body">

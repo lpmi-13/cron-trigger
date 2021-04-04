@@ -198,7 +198,7 @@ export const generateSimpleCronString = () => {
 // values * => 59 can be MINUTES
 
 const filterForPossible = ( cronString ) => {
-  const [ minutes, hours, dayOfMonth, month, dayOfWeek ] = cronString;
+  const [ , hours, dayOfMonth, month, dayOfWeek ] = cronString;
   if (hours !== '*' && parseInt(hours, 10) > 23) {
     return false;
   } else if (dayOfMonth !== '*' && dayOfMonth === '0' && parseInt(dayOfMonth, 10) > 28) {

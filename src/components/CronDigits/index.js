@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 import { generateCronPhrase, generateCronString } from '../../util';
 
-import SampleHorizontalList from '../SampleHorizontalList';
+import CronDigitsList from '../CronDigitsList';
 import CorrectMessage from '../CorrectMessage';
 
 // some good old Fisher-Yates with a very hacky recursion to force no item to go back to its original position
@@ -69,8 +69,7 @@ const CronDigits = () => {
 
     return (
         <>
-          <SampleHorizontalList cronDigits={mixedUpCron} handleReorder={handleReorderDigits} />
-          {/* <pre>{cronStringArray[cronIndex]}</pre> */}
+          <CronDigitsList cronDigits={mixedUpCron} handleReorder={handleReorderDigits} />
           <div className="cronPhrase">
             {cronPhrase}
           </div>

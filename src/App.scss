@@ -33,7 +33,7 @@
   background-color: #000;
   color: #FF007D;
   height: 2em;
-  padding: 1em 0;
+  padding: 1em 0 0;
   text-transform: uppercase;
   font-size: 2rem;
   display: flex;
@@ -99,6 +99,16 @@
   font-size: 1.5rem;
 }
 
+.multipleChoiceButton {
+  border-radius: 0.25em;
+  font-size: 1rem;
+}
+
+.readThisCron {
+  font-size: 1.75rem;
+  letter-spacing: 0.75rem;
+}
+
 .App-link {
   color: #61dafb;
 }
@@ -107,4 +117,13 @@
   &.inactive {
     visibility: hidden;
   }
+}
+
+.multipleChoice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 0.5em;
+  height: 15em;
 }

@@ -6,7 +6,7 @@ const amOrPm = (number) => number >= 12 ? 'PM' : 'AM';
 const getMinutes = (minutes) => minutes === '*' ? 'every minute after' : `at ${minutes} minutes after`;
 
 const getHours = (hours) => {
-  if (hours === 0) {
+  if (hours === 0 || hours === '0') {
     return '12AM';
   } else {
     const suffix = hours === '*' ? '' : amOrPm(hours);
@@ -136,6 +136,7 @@ export const generateCronString = () => {
   const hour = () => Math.random() < 0.5 ? '*' : numberRange(0, 23);
   // this has to start with 1
   const month = () =>  Math.random() < 0.5 ? '*' : numberRange(1, 12);
+  // this also needs to start with 1
   const dayOfMonth = () => {
     let generatedDay;
     if (month === 2) {
@@ -163,4 +164,77 @@ export const generateCronString = () => {
       return generateCronString()
   }
   return fullString;
+}
+
+export const generateSimpleCronString = () => {
+  // these functions use smaller ranges for the cron values,
+  // just so they play nice with the current implementation of the
+  // shuffle and distractor generator
+  const genMinute = Math.random() < 0.5 ? '*' : numberRange(1, 12);
+  const genHour = Math.random() < 0.5 ? '*' : numberRange(1, 12);
+  const genMonth = Math.random() < 0.5 ? '*' : numberRange(1, 12);
+  const genDayOfMonth = Math.random() < 0.5 ? '*' : numberRange(1, 12)
+  const genDayOfWeek = Math.random() < 0.5 ? '*' : numberRange(1,6);
+
+  const fullString = `${genMinute} ${genHour} ${genDayOfMonth} ${genMonth} ${genDayOfWeek}`;
+  // since the correctness check happens after you move something, it doesn't know that this is
+  // already correct, and there's not really much sense practicing it anyway
+  if (fullString === '* * * * *') {
+      return generateCronString()
+  }
+  return fullString;
+}
+
+// we have a cronstring, and we need three other cronstrings that have the same numbers
+// eg, we get 30 8 * 4 *
+// to keep the same numbers, we need to use numbers with realistic max values
+// MINUTES -- HOUR -- DAY-OF-MONTH -- MONTH -- DAY-OF-WEEK
+//   59        23         28            12         6
+
+// values * => 6 can be anything
+// values * => 12 can be MINUTES/HOURS/DOM/MONTH
+// values * => 23 can be MINUTES/HOURS/DOM
+// values * => 28 can be MINUTES/DOM
+// values * => 59 can be MINUTES
+
+const filterForPossible = ( cronString ) => {
+  const [ minutes, hours, dayOfMonth, month, dayOfWeek ] = cronString;
+  if (hours !== '*' && parseInt(hours, 10) > 23) {
+    return false;
+  } else if (dayOfMonth !== '*' && dayOfMonth === '0' && parseInt(dayOfMonth, 10) > 28) {
+    return false;
+  } else if (month !== '*' && month === '0' && parseInt(month, 10) > 12) {
+    return false;
+  } else if (dayOfWeek !== '*' && parseInt(dayOfWeek) > 6) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+const simpleShuffle = arr => {
+  let arrCopy = [...arr]
+
+  var i = arrCopy.length, j, temp;
+  while(--i > 0){
+    j = Math.floor(Math.random()*(i+1));
+    temp = arrCopy[j];
+    arrCopy[j] = arrCopy[i];
+    arrCopy[i] = temp;
+  }
+  return arrCopy
+}
+
+export const createDistractors = ( cronString ) => {
+  const cronArray = [cronString];
+  const splitString = cronString.split(' ');
+  for (let i = 0; i < 3; i++) {
+    let tempArray = simpleShuffle(splitString)  
+    while(!filterForPossible(tempArray) || cronArray.includes(tempArray.join(' '))) {
+      tempArray = simpleShuffle(tempArray)
+      console.log(tempArray)
+    }
+    cronArray.push(tempArray.join(' '))
+  }
+  return cronArray;
 }

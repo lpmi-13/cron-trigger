@@ -31,7 +31,7 @@ const getListStyle = isDraggingOver => ({
   overflow: 'auto',
 });
 
-const SampleHorizontalList = ({ cronDigits, handleReorder }) => {
+const CronDigitsList = ({ cronDigits, handleReorder }) => {
 
   const [digits, setDigits] = useState(cronDigits);
 
@@ -91,4 +91,4 @@ const SampleHorizontalList = ({ cronDigits, handleReorder }) => {
   );
 }
 
-export default SampleHorizontalList
+export default CronDigitsList

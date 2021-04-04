@@ -14,8 +14,6 @@ const CronWords = () => {
     const [correctAnswer, setCorrectAnswer] = useState(false);
 
     const handleSelection = (event) => {
-      console.log(event.target.innerText);
-      console.log(cronPhrase);
       setCorrectAnswer(event.target.innerText === cronPhrase)
     }
 

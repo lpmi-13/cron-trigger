@@ -232,7 +232,6 @@ export const createDistractors = ( cronString ) => {
     let tempArray = simpleShuffle(splitString)  
     while(!filterForPossible(tempArray) || cronArray.includes(tempArray.join(' '))) {
       tempArray = simpleShuffle(tempArray)
-      console.log(tempArray)
     }
     cronArray.push(tempArray.join(' '))
   }

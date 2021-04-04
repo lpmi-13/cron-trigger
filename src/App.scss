@@ -64,6 +64,17 @@
     border-radius: 0.75em;
     font-size: 2em;
   }
+
+  .multipleChoiceButton {
+    border-radius: 0.25em;
+    font-size: 1.75rem;
+  }
+
+  .readThisCron {
+    padding-top: 1.5em;
+    font-size: 1.75rem;
+    letter-spacing: 1rem;
+  }
 }
 
 @media only screen and (max-width: 599px) {
@@ -91,6 +102,16 @@
     border-radius: 0.75em;
     font-size: 1.5em;
   }
+
+  .multipleChoiceButton {
+    border-radius: 0.25em;
+    font-size: 1rem;
+  }
+
+  .readThisCron {
+    font-size: 1.75rem;
+    letter-spacing: 0.75rem;
+  }
 }
 
 .cronItem {
@@ -99,15 +120,8 @@
   font-size: 1.5rem;
 }
 
-.multipleChoiceButton {
-  border-radius: 0.25em;
-  font-size: 1rem;
-}
 
-.readThisCron {
-  font-size: 1.75rem;
-  letter-spacing: 0.75rem;
-}
+
 
 .App-link {
   color: #61dafb;

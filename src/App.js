@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import './App.scss';
 import { motion } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 
+import Layout from './components/Layout';
 import CronDigits from './components/CronDigits';
 import CronWords from './components/CronWords';
+import HelpModal from './components/HelpModal';
 
 const App = () => {
 
   const [mode, setMode] = useState(true)
+  const [modalActive, setModalActive] = useState(false);
 
   const toggleMode = () => setMode(!mode)
+  const handleClickModal = () => setModalActive(!modalActive);
+
   return (
-    <div className="App">
+    <Layout>
       <header className="App-header">
           <motion.button
             whileHover={{ scale: 1.1 }}
@@ -23,6 +30,9 @@ const App = () => {
             >
             Write a Cron
           </motion.button>
+          <div role="button" aria-label="help info" className="top-icons">
+            <FontAwesomeIcon icon={faQuestionCircle} onClick={handleClickModal} />
+          </div>
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
@@ -41,7 +51,8 @@ const App = () => {
           : <CronWords />
         }
       </main>
-    </div>
+      <HelpModal active={modalActive} onClickClose={handleClickModal}/>
+    </Layout>
   );
 }
 

@@ -43,7 +43,9 @@ const mixUpDigits = (cronArray) => {
   return shuffled;
 }
 
-const CronDigits = () => {
+const PAUSE_LENGTH = 3000;
+
+const CronDigits = ({ firstView, onView }) => {
 
   const newCron = generateCronString();
 
@@ -63,12 +65,23 @@ const CronDigits = () => {
   }
 
   useEffect(() => {
+    setTimeout(() => {
+      onView(false);
+    }, PAUSE_LENGTH)
+  })
+
+  useEffect(() => {
     setCronPhrase(generateCronPhrase(cronString))
     setMixedUpCron(mixUpDigits(cronString))
   }, [cronString]);
 
     return (
         <>
+          {firstView && (
+            <div className="firstView">
+              drag and re-arrange to match the phrase
+            </div>
+          )}
           <CronDigitsList cronDigits={mixedUpCron} handleReorder={handleReorderDigits} />
           <div className="cronPhrase">
             {cronPhrase}

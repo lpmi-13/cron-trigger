@@ -5,8 +5,9 @@ import MultipleChoiceButton from '../MultipleChoiceButton';
 import CorrectMessage from '../CorrectMessage';
 import { createDistractors, generateCronPhrase, generateSimpleCronString } from '../../util';
 
+const PAUSE_LENGTH = 3000;
 
-const CronWords = () => {
+const CronWords = ({ firstView, onView }) => {
 
     const [cronString, setCronString] = useState(generateSimpleCronString())
     const [cronPhrase, setCronPhrase] = useState(generateCronPhrase(cronString))
@@ -16,6 +17,12 @@ const CronWords = () => {
     const handleSelection = (event) => {
       setCorrectAnswer(event.target.innerText === cronPhrase)
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+          onView(false);
+        }, PAUSE_LENGTH)
+    })
 
     useEffect(() => {
         setDistractors(createDistractors(cronString));
@@ -29,6 +36,13 @@ const CronWords = () => {
 
     return (
         <>
+            {
+              firstView && (
+               <div className="firstView">
+                click the correct answer for the cron
+               </div>
+               )
+            }
             <div className="readThisCron">
                 {cronString}
             </div>

@@ -13,6 +13,8 @@ const App = () => {
 
   const [mode, setMode] = useState(true)
   const [modalActive, setModalActive] = useState(false);
+  const [firstViewRead, setFirstViewRead] = useState(true)
+  const [firstViewWrite, setFirstViewWrite] = useState(true);
 
   const toggleMode = () => setMode(!mode)
   const handleClickModal = () => setModalActive(!modalActive);
@@ -47,8 +49,8 @@ const App = () => {
       <main className="App-body">
         {
           mode
-          ? <CronDigits />
-          : <CronWords />
+          ? <CronDigits firstView={firstViewWrite} onView={setFirstViewWrite} />
+          : <CronWords firstView={firstViewRead} onView={setFirstViewRead} />
         }
       </main>
       <HelpModal active={modalActive} onClickClose={handleClickModal}/>

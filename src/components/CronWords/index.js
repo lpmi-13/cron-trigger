@@ -44,7 +44,9 @@ const CronWords = ({ firstView, onView }) => {
                )
             }
             <div className="readThisCron">
-                {cronString}
+                <pre>
+                  {cronString}
+                </pre>
             </div>
             <div className="multipleChoice">
                 {distractors.map(choice => {
@@ -58,7 +60,7 @@ const CronWords = ({ firstView, onView }) => {
             onClick={handleClickNext}
             aria-label="write a cron"
             >
-            next cron
+            next
           </motion.button>
           <CorrectMessage active={correctAnswer}/>
         </>

@@ -93,7 +93,7 @@ const CronDigits = ({ firstView, onView }) => {
             onClick={handleClickNext}
             aria-label="write a cron"
             >
-            next cron
+            next
           </motion.button>
           <CorrectMessage active={correctAnswer}/>
         </>

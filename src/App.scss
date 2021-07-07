@@ -52,6 +52,83 @@
   min-height: 2em;
 }
 
+.cronItem {
+  width: 1em;
+  border-radius: 0.25em;
+  font-size: 1.5rem;
+}
+
+
+.App-link {
+  color: #61dafb;
+}
+
+.congrats {
+  &.inactive {
+    visibility: hidden;
+  }
+}
+
+.multipleChoice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 0.5em;
+  height: 15em;
+}
+
+.modalInactive {
+    display: none;
+}
+
+.modal-info {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.asterisks {
+  margin: 1em 0;
+  font-weight: bold;
+  letter-spacing: 0.45rem;
+  font-size: 3rem;
+  sub {
+    font-size: 1rem;
+  }
+}
+
+.explanation {
+  display: flex;
+  flex-direction: column;
+
+  div {
+    padding: 0.25em;
+  }
+}
+
+.modalActive {
+    position: absolute;
+    background-color: #fa61ae;
+    opacity: 0.9;
+    border-radius: 2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 82vh;
+    top: 1.25em;
+    width: 92vw;
+    padding-left: 0.75em;
+}
+
+.cancel-button {
+    font-size: 4em;
+    color: white;
+}
+
 @media only screen and (min-width: 600px) {
 
   .congrats {
@@ -129,81 +206,4 @@
     font-size: 1.75rem;
     letter-spacing: 0.75rem;
   }
-}
-
-.cronItem {
-  width: 1em;
-  border-radius: 0.25em;
-  font-size: 1.5rem;
-}
-
-
-.App-link {
-  color: #61dafb;
-}
-
-.congrats {
-  &.inactive {
-    visibility: hidden;
-  }
-}
-
-.multipleChoice {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-evenly;
-  padding: 0.5em;
-  height: 15em;
-}
-
-.modalInactive {
-    display: none;
-}
-
-.modal-info {
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 1.5rem;
-}
-
-.asterisks {
-  margin: 1em 0;
-  font-weight: bold;
-  letter-spacing: 0.45rem;
-  font-size: 3rem;
-  sub {
-    font-size: 1rem;
-  }
-}
-
-.explanation {
-  display: flex;
-  flex-direction: column;
-
-  div {
-    padding: 0.25em;
-  }
-}
-
-.modalActive {
-    position: absolute;
-    background-color: #fa61ae;
-    opacity: 0.9;
-    border-radius: 2em;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    height: 82vh;
-    top: 1.25em;
-    width: 92vw;
-    padding-left: 0.75em;
-}
-
-.cancel-button {
-    font-size: 4em;
-    color: white;
 }

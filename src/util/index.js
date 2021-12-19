@@ -235,5 +235,5 @@ export const createDistractors = ( cronString ) => {
     }
     cronArray.push(tempArray.join(' '))
   }
-  return cronArray;
+  return simpleShuffle(cronArray);
 }

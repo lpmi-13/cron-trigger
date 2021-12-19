@@ -50,15 +50,15 @@ const CronWords = ({ firstView, onView }) => {
             </div>
             <div className="multipleChoice">
                 {distractors.map(choice => {
-                    return <MultipleChoiceButton cronPhrase={generateCronPhrase(choice)} key={choice} onClick={handleSelection} />
+                    return <MultipleChoiceButton phrase={generateCronPhrase(choice)} key={choice} onClick={handleSelection} />
                 })}
             </div>
             <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className={`nextCron`}
-            onClick={handleClickNext}
-            aria-label="write a cron"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              className={`nextCron`}
+              onClick={handleClickNext}
+              aria-label="write a cron"
             >
             next
           </motion.button>

@@ -1,15 +1,15 @@
 import { motion } from 'framer-motion';
 
-const MultipleChoiceButton = ({ cronPhrase, onClick }) => {
+const MultipleChoiceButton = ({ phrase, onClick }) => {
     return (
         <motion.button
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           className={"multipleChoiceButton"}
           onClick={onClick}
-          aria-label={cronPhrase}
+          aria-label={phrase}
           >
-          {cronPhrase}
+          {phrase}
         </motion.button>
     )
 }
